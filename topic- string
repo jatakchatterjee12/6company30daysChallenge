@@ -1,0 +1,27 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        
+        // Sliding Window 
+
+        int n = s.length();
+        int[] count = new int[256];
+
+        int i = 0, j = 0;
+        int maxL = 0;
+
+        while(j < n){
+
+            while(count[s.charAt(j)] == 1){ // repeating char, already seen before within the window
+                count[s.charAt(i)] = 0;
+                i++;
+            }
+            
+            maxL = Math.max(maxL, j - i + 1);
+
+            count[s.charAt(j)] = 1;
+            j++;
+        }
+
+        return maxL;
+    }
+}
